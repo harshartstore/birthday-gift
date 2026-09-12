@@ -1,0 +1,414 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   OPENING
+========================= */
+
+#opening {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+
+/* =========================
+   STICKMAN
+========================= */
+
+#stickman {
+    position: absolute;
+    width: 100px;
+    height: 180px;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: stickmanAppear 2s ease forwards;
+}
+
+
+/* Head */
+
+.head {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border: 4px solid white;
+    border-radius: 50%;
+    left: 29px;
+    top: 0;
+}
+
+
+/* Body */
+
+.body {
+    position: absolute;
+    width: 4px;
+    height: 70px;
+    background: white;
+    left: 48px;
+    top: 42px;
+}
+
+
+/* Arms */
+
+.arm {
+    position: absolute;
+    width: 55px;
+    height: 4px;
+    background: white;
+    top: 65px;
+    transform-origin: left center;
+}
+
+.left-arm {
+    left: 48px;
+    transform: rotate(150deg);
+    animation: leftArm 1s infinite alternate ease-in-out;
+}
+
+.right-arm {
+    left: 48px;
+    transform: rotate(30deg);
+    animation: rightArm 1s infinite alternate ease-in-out;
+}
+
+
+/* Legs */
+
+.leg {
+    position: absolute;
+    width: 65px;
+    height: 4px;
+    background: white;
+    top: 110px;
+    left: 48px;
+    transform-origin: left center;
+}
+
+.left-leg {
+    transform: rotate(120deg);
+}
+
+.right-leg {
+    transform: rotate(60deg);
+}
+
+
+/* =========================
+   HELP TEXT
+========================= */
+
+#help-text {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 5px;
+    top: calc(48% + 100px);
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: helpAppear 2s ease 1s forwards;
+}
+
+
+/* =========================
+   SPARK
+========================= */
+
+#spark {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+
+    left: 50%;
+    top: 30%;
+
+    transform: translate(-50%, -50%) scale(0);
+
+    box-shadow:
+        0 0 10px white,
+        0 0 25px white,
+        0 0 50px white;
+
+    animation: sparkAppear 2s ease 4s forwards;
+}
+
+
+/* =========================
+   WHITE FLASH
+========================= */
+
+#flash {
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    z-index: 20;
+    pointer-events: none;
+}
+
+
+/* =========================
+   BIRTHDAY SCREEN
+========================= */
+
+#birthday {
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at center,
+        #173b73 0%,
+        #071b3a 45%,
+        #020b1c 100%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    z-index: 5;
+}
+
+
+.birthday-content {
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+
+/* Main title */
+
+h1 {
+    font-size: clamp(40px, 7vw, 90px);
+    font-weight: 900;
+    letter-spacing: 5px;
+
+    opacity: 0;
+    transform: translateY(30px);
+
+    animation: titleAppear 2s ease 7s forwards;
+}
+
+
+/* Main message */
+
+h2 {
+    margin-top: 35px;
+
+    font-size: clamp(25px, 4vw, 55px);
+    font-weight: 900;
+
+    line-height: 1.25;
+    letter-spacing: 3px;
+
+    opacity: 0;
+    transform: translateY(30px);
+
+    animation: messageAppear 2s ease 8s forwards;
+}
+
+
+.birthday-content p {
+    margin-top: 35px;
+
+    font-size: 22px;
+    letter-spacing: 3px;
+
+    opacity: 0;
+
+    animation: signatureAppear 2s ease 9.5s forwards;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes stickmanAppear {
+
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+
+@keyframes helpAppear {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes leftArm {
+
+    from {
+        transform: rotate(140deg);
+    }
+
+    to {
+        transform: rotate(165deg);
+    }
+}
+
+
+@keyframes rightArm {
+
+    from {
+        transform: rotate(40deg);
+    }
+
+    to {
+        transform: rotate(15deg);
+    }
+}
+
+
+@keyframes sparkAppear {
+
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(80);
+        opacity: 1;
+    }
+}
+
+
+@keyframes titleAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes messageAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes signatureAppear {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+/* =========================
+   PAGE 2
+========================= */
+
+#page2 {
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at center,
+        #173b73 0%,
+        #071b3a 50%,
+        #020b1c 100%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    z-index: 30;
+
+    transition: opacity 1.2s ease;
+}
+
+
+.page2-content {
+    width: min(900px, 85%);
+    text-align: center;
+    color: white;
+}
+
+
+.page2-content h1 {
+    font-size: clamp(25px, 3vw, 40px);
+    font-weight: 900;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+
+    opacity: 0;
+    transform: translateY(25px);
+}
+.your-paragraph {
+    min-height: 250px;
+
+    font-size: clamp(18px, 2vw, 25px);
+    line-height: 1.8;
+    letter-spacing: 1px;
+    
+    /* Move paragraph content into the HTML. Styles only belong in CSS. */
+
+    opacity: 0;
+    transform: translateY(25px);
+}
