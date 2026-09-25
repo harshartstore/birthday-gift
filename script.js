@@ -1,81 +1,87 @@
-window.addEventListener("load", () => {
+const blowButton = document.getElementById("blowButton");
+const flames = document.querySelectorAll(".flame");
 
-    const opening = document.getElementById("opening");
-    const flash = document.getElementById("flash");
-    const birthday = document.getElementById("birthday");
-    const page2 = document.getElementById("page2");
+const cakeScene = document.querySelector(".cake-scene");
+const firstMessage = document.getElementById("firstMessage");
+const page2 = document.getElementById("page2");
 
-    let openingFinished = false;
-    let page2Shown = false;
-
-
-    /* =========================
-       OPENING TIMELINE
-    ========================= */
-
-    setTimeout(() => {
-
-        flash.style.transition = "opacity 0.15s ease";
-        flash.style.opacity = "1";
-
-    }, 5800);
+let candlesBlown = false;
 
 
-    setTimeout(() => {
+// ================================
+// BLOW THE CANDLES
+// ================================
 
-        opening.style.display = "none";
+blowButton.addEventListener("click", function (event) {
 
-        birthday.style.transition = "opacity 1.2s ease";
-        birthday.style.opacity = "1";
+    event.stopPropagation();
 
-        openingFinished = true;
+    if (candlesBlown) {
+        return;
+    }
 
-    }, 6100);
+    candlesBlown = true;
 
-
-    setTimeout(() => {
-
-        flash.style.transition = "opacity 1s ease";
-        flash.style.opacity = "0";
-
-    }, 6200);
-
-
-    /* =========================
-       CLICK ANYWHERE → PAGE 2
-    ========================= */
-
-    document.addEventListener("click", () => {
-
-        if (!openingFinished || page2Shown) return;
-
-        page2Shown = true;
-
-        page2.style.visibility = "visible";
-        page2.style.opacity = "1";
-
-        setTimeout(() => {
-
-            page2.querySelector("h1").style.transition =
-                "opacity 1s ease, transform 1s ease";
-
-            page2.querySelector("h1").style.opacity = "1";
-            page2.querySelector("h1").style.transform = "translateY(0)";
-
-
-            setTimeout(() => {
-
-                page2.querySelector(".your-paragraph").style.transition =
-                    "opacity 1.5s ease, transform 1.5s ease";
-
-                page2.querySelector(".your-paragraph").style.opacity = "1";
-                page2.querySelector(".your-paragraph").style.transform =
-                    "translateY(0)";
-
-            }, 500);
-
-        }, 400);
-
+    // Turn off all flames
+    flames.forEach(function (flame) {
+        flame.classList.add("off");
     });
+
+    // Change button text
+    blowButton.textContent = "✨ MAKE A WISH ✨";
+
+    blowButton.disabled = true;
+
+    // Change hint text
+    document.getElementById("blowHint").textContent =
+        "Wish made? Good... ❤️";
+
+
+    // Wait for flames to disappear
+    setTimeout(function () {
+
+        // Fade out cake
+        cakeScene.style.opacity = "0";
+
+        setTimeout(function () {
+
+            // Hide cake scene
+            cakeScene.style.visibility = "hidden";
+
+            // Show birthday message
+            firstMessage.classList.add("show");
+
+        }, 1000);
+
+    }, 700);
+
+});
+
+
+// ================================
+// FIRST MESSAGE → PAGE 2
+// ================================
+
+firstMessage.addEventListener("click", function () {
+
+    if (!candlesBlown) {
+        return;
+    }
+
+    // Fade out first message
+    firstMessage.style.opacity = "0";
+
+    setTimeout(function () {
+
+        // Hide first message
+        firstMessage.style.visibility = "hidden";
+
+        // Show page 2
+        page2.classList.add("show");
+
+        // Allow scrolling
+        document.body.style.overflow = "auto";
+
+    }, 700);
 
 });
